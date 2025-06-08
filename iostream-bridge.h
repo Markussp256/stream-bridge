@@ -5,8 +5,8 @@
 
 namespace stream
 {
-  inline extern ostream cout;
-  inline extern ostream cerr;
+  extern ostream cout;
+  extern ostream cerr;
 }
 
 #endif // IOSTREAM-BRIDGE_H

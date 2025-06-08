@@ -15,9 +15,9 @@
 
 namespace stream
 {
-    static OStreamImpl CoutImpl{std::cout};
+    static OStreamImpl COutImpl{std::cout};
     static OStreamImpl CErrImpl{std::cerr};
-    stream::ostream cout(&CoutImpl);
-    stream::ostream cerr(&CErrImpl);
+    ostream            cout(&COutImpl);
+    ostream            cerr(&CErrImpl);
 }
 
