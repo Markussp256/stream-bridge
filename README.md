@@ -41,4 +41,14 @@ This makes it useful for large C++ projects with many translation units includin
 
 - Not as feature-complete or generic as the standard C++ stream library.
 - Slight runtime overhead due to the extra layer of indirection.
-- Currently limited in sc
+- Currently limited in scope — intended as a **proof of concept**.
+
+---
+
+## Status
+
+This project is still in an early stage and serves as a minimal demonstration. Contributions and extensions are welcome!
+
+📦 **Demo compile-time benchmark**: [Link to benchmark](https://github.com/Markussp256/stream-bridge-benchmark)
+
+---
