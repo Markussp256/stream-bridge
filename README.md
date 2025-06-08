@@ -1,26 +1,44 @@
 # stream-bridge
-bridge pattern for c++ stream-libraries
 
-this library allows to replace the stream includes
-<iostream>
-<iomanip>
-<sstream>
-<fstream>
+A lightweight C++ stream wrapper using the Bridge (PIMPL) design pattern.
 
-with the more lightweight briges
-"iostream-bridge.h"
-"sstream-bridge.h"
-"fstream-bridge.h"
+---
 
-which uses the bridge/pimpl idiom. The implemtation is straighforward by calling
-the corresponding methods from the std namespace.
+## Overview
 
-The bridge version is less generic/templatized, so it does not offere the same functionality
-as the c++ stream libraries. Also due to additional indirection there is a small performance
-loss to be paid.
+This library provides lightweight replacements for the standard C++ stream headers:
 
-The main benefit of this library is the smaller compile time for projects that have many
-includes for streams. httpp.... .com compares the compile times for a demo projects
+- `<iostream>`
+- `<iomanip>`
+- `<sstream>`
+- `<fstream>`
 
-this project is far from being complete, it is at the moment just a small demonstration. 
-Feel free to contribute/extend the library.
+You can replace these with:
+
+- `"iostream-bridge.h"`
+- `"sstream-bridge.h"`
+- `"fstream-bridge.h"`
+
+The implementation uses the **Bridge / PIMPL idiom**, and simply forwards calls to the corresponding functions in the standard C++ stream library.
+
+---
+
+## Why use this?
+
+The standard `<iostream>` headers are heavy and can lead to long compile times in large projects.
+
+The `stream-bridge` library:
+
+- Reduces compile times by isolating stream dependencies.
+- Uses fewer templates and is less generic, making it faster to compile.
+- Trades a bit of runtime performance (due to indirection) for better build performance.
+
+This makes it useful for large C++ projects with many translation units including stream headers.
+
+---
+
+## Limitations
+
+- Not as feature-complete or generic as the standard C++ stream library.
+- Slight runtime overhead due to the extra layer of indirection.
+- Currently limited in sc
