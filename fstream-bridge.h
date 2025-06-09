@@ -3,6 +3,7 @@
 
 //  app
 
+    #include "istream-bridge.h"
     #include "ostream-bridge.h"
 
 
@@ -14,16 +15,26 @@
 
 namespace stream
 {
-  struct ios_base
+  class IFStreamImpl;
+  class ifstream : public istream
   {
-    using openmode = unsigned int;
-    static constexpr openmode in     = 1 << 0; // open for reading
-    static constexpr openmode out    = 1 << 1; // open for writing
-    static constexpr openmode binary = 1 << 2; // open in binary mode
-    static constexpr openmode trunc  = 1 << 3; // truncate file
-    static constexpr openmode app    = 1 << 4; // append mode
-    static constexpr openmode ate    = 1 << 5; // seek to end after open
+      IFStreamImpl* Impl;
+      ifstream(IFStreamImpl* impl);
+    public  :
+      ifstream    (void);
+     ~ifstream    (void);
+      ifstream    (const std::string& fileName, ios_base::openmode om=ios_base::in);
+      void open   (const std::string& fileName, ios_base::openmode om=ios_base::in);
+      bool is_open(void) const;
+      void close  (void) const;
   };
+
+  template<typename T>
+  ifstream& operator>>(ifstream& is, T& v)
+  {
+      is.scan(v);
+      return is;
+  }
 
   class OFStreamImpl;
   class ofstream : public ostream
@@ -31,14 +42,9 @@ namespace stream
       OFStreamImpl* Impl;
       ofstream(OFStreamImpl* impl);
     public  :
-      ofstream(void);
-     ~ofstream(void);
-      ofstream(const std::string& fileName, ios_base::openmode om=ios_base::in);
-      ofstream           (const ofstream& os) = delete;
-      ofstream& operator=(const ofstream& os) = delete;
-      ofstream           (ofstream&& os)      = delete;
-      ofstream& operator=(ofstream&& os)      = delete;
-      
+      ofstream    (void);
+     ~ofstream    (void);
+      ofstream    (const std::string& fileName, ios_base::openmode om=ios_base::in);
       void open   (const std::string& fileName, ios_base::openmode om=ios_base::in);
       bool is_open(void) const;
       void close  (void) const;
@@ -51,6 +57,35 @@ namespace stream
       return os;
   }
 
+  class FStreamImpl;
+  class fstream
+    : public istream
+    , public ostream
+  {
+      FStreamImpl* Impl;
+      fstream(FStreamImpl* impl);
+    public  :
+      fstream     (void);
+     ~fstream     (void);
+      fstream     (const std::string& fileName, ios_base::openmode om=ios_base::in);
+      void open   (const std::string& fileName, ios_base::openmode om=ios_base::in);
+      bool is_open(void) const;
+      void close  (void) const;
+  };
+
+  template<typename T>
+  fstream& operator>>(fstream& is, T& v)
+  {
+      is.scan(v);
+      return is;
+  }
+
+  template<typename T>
+  fstream& operator<<(fstream& os, T&& v)
+  {
+      os.print(std::forward<T>(v));
+      return os;
+  }
 }
 
 

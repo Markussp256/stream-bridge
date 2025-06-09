@@ -1,19 +1,27 @@
 #ifndef OSTREAM_IMPL_H
 #define OSTREAM_IMPL_H
 
-#include <ostream>
+//  app
+
+    #include "ios-base-impl.h"
+
+
+//  c++
+
+    #include <ostream>
+
 
 namespace stream
 {
-    class OStreamImpl { public : std::ostream& Os; };
-
-    template<class stdostream_t>
-    class OStreamImplTemplate : public stdostream_t
+    class OStreamImpl : public BaseImpl
     {
-        OStreamImpl OS{*this};
-      public :
-        using stdostream_t::stdostream_t;
-        OStreamImpl& os (void) { return OS; }
+        public :
+        std::ostream& Os;
+        OStreamImpl(std::ostream& os)
+            : BaseImpl{os}
+            , Os(os)
+        {
+        }
     };
 }
 

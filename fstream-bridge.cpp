@@ -2,40 +2,46 @@
 
     #include "fstream-bridge.h"
 
+
 //  app
 
-    #include "ostream-impl.h"
+    #include "ios-bridge.h"
+    #include "iostream-template.h"
 
 
 //  c++
 
-    #include <array>
     #include <fstream>
 
 
+static std::ios_base::openmode convert(stream::ios_base::openmode om)
+{
+    return stream::streamOpenMode2stdOpenMode(om);
+}
+
 namespace stream
 {
-
-    static std::array<std::pair<std::ios_base::openmode,ios_base::openmode>,6> Pairs
+    class IFStreamImpl : public IStreamImplTemplate<std::ifstream>
     {
-        std::make_pair(ios_base::in    , std::ios_base::in    ),
-        std::make_pair(ios_base::out   , std::ios_base::out   ),
-        std::make_pair(ios_base::binary, std::ios_base::binary),
-        std::make_pair(ios_base::trunc , std::ios_base::trunc ),
-        std::make_pair(ios_base::app   , std::ios_base::app   ),
-        std::make_pair(ios_base::ate   , std::ios_base::ate   )
+        public :
+            using IStreamImplTemplate<std::ifstream>::IStreamImplTemplate;
     };
-
-    static std::ios_base::openmode convert(ios_base::openmode om)
+    
+    ifstream ::  ifstream(IFStreamImpl* impl)
+        : base(&impl->Is)
+        , istream(&impl->Is)
+        , Impl(impl)
     {
-        std::ios_base::openmode res=static_cast<std::ios_base::openmode>(0);
-        for(const auto& p : Pairs)
-        {
-            if(om & p.first) res=res | p.second;
-        }
-        return res;
     }
 
+    ifstream ::  ifstream(void) : ifstream(new IFStreamImpl()) {}
+    ifstream ::  ifstream(const std::string& fileName, ios_base::openmode om)
+                                : ifstream(new IFStreamImpl(fileName,convert(om))) {}
+    ifstream :: ~ifstream(void) { delete Impl; }
+    void ifstream :: open   (const std::string& fileName, ios_base::openmode om) { Impl->open(fileName,convert(om)); }
+    bool ifstream :: is_open(void) const { return Impl->is_open(); }
+    void ifstream :: close  (void) const { Impl->close(); }
+    
     class OFStreamImpl : public OStreamImplTemplate<std::ofstream>
     {
         public :
@@ -43,7 +49,8 @@ namespace stream
     };
     
     ofstream ::  ofstream(OFStreamImpl* impl)
-        : ostream(&impl->os())
+        : base(&impl->Os)
+        , ostream(&impl->Os)
         , Impl(impl)
     {
     }
@@ -55,4 +62,26 @@ namespace stream
     void ofstream :: open   (const std::string& fileName, ios_base::openmode om) { Impl->open(fileName,convert(om)); }
     bool ofstream :: is_open(void) const { return Impl->is_open(); }
     void ofstream :: close  (void) const { Impl->close(); }
+    
+    class FStreamImpl : public StreamImplTemplate<std::fstream>
+    {
+        public :
+            using StreamImplTemplate<std::fstream>::StreamImplTemplate;
+    };
+    
+    fstream ::  fstream(FStreamImpl* impl)
+        : base(&impl->Is)
+        , istream(&impl->Is)
+        , ostream(&impl->Os)
+        , Impl(impl)
+    {
+    }
+
+    fstream ::  fstream(void) : fstream(new FStreamImpl()) {}
+    fstream ::  fstream(const std::string& fileName, ios_base::openmode om)
+                                : fstream(new FStreamImpl(fileName,convert(om))) {}
+    fstream :: ~fstream(void) { delete Impl; }
+    void fstream :: open   (const std::string& fileName, ios_base::openmode om) { Impl->open(fileName,convert(om)); }
+    bool fstream :: is_open(void) const { return Impl->is_open(); }
+    void fstream :: close  (void) const { Impl->close(); }
 }

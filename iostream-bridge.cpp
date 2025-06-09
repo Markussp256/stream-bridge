@@ -5,6 +5,7 @@
 
 //  app
 
+    #include "istream-impl.h"
     #include "ostream-impl.h"
 
 
@@ -15,9 +16,23 @@
 
 namespace stream
 {
-    static OStreamImpl COutImpl{std::cout};
-    static OStreamImpl CErrImpl{std::cerr};
-    ostream            cout(&COutImpl);
-    ostream            cerr(&CErrImpl);
+    static IStreamImpl& getCInImpl() {
+        static IStreamImpl impl{std::cin};
+        return impl;
+    }
+
+    static OStreamImpl& getCOutImpl() {
+        static OStreamImpl impl{std::cout};
+        return impl;
+    }
+
+    static OStreamImpl& getCErrImpl() {
+        static OStreamImpl impl{std::cerr};
+        return impl;
+    }
+
+    istream cin{&getCInImpl()};
+    ostream cout{&getCOutImpl()};
+    ostream cerr{&getCErrImpl()};
 }
 

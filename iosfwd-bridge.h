@@ -3,11 +3,14 @@
 
 namespace stream
 {
+  class istream;
   class ostream;
+  class ifstream;
   class ofstream;
+  class fstream;
+  class istringstream;
   class ostringstream;
-
-
+  class stringstream;
 }
 
 

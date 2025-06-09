@@ -3,6 +3,7 @@
 
 //  app
 
+    #include "istream-bridge.h"
     #include "ostream-bridge.h"
 
 
@@ -14,26 +15,73 @@
 
 namespace stream
 {
-  class OSStreamImpl;
+  class IStringStreamImpl;
+  class istringstream : public istream
+  {
+    private :
+      IStringStreamImpl* Impl;
+      istringstream(IStringStreamImpl* impl);
+    public  :  
+      istringstream(void);
+     ~istringstream(void);
+      istringstream(std::string&& str);
+
+      std::string str(void) const;
+  };
+
+  template<typename T>
+  istringstream& operator>>(istringstream& os, T& v)
+  {
+      os.scan(v);
+      return os;
+  }
+
+  class OStringStreamImpl;
   class ostringstream : public ostream
   {
     private :
-      OSStreamImpl* Impl;
-      ostringstream(OSStreamImpl* impl);
+      OStringStreamImpl* Impl;
+      ostringstream(OStringStreamImpl* impl);
     public  :  
       ostringstream(void);
      ~ostringstream(void);
-      ostringstream(const std::string& str);
-      ostringstream           (const ostringstream& os) = delete;
-      ostringstream& operator=(const ostringstream& os) = delete;
-      ostringstream           (ostringstream&& os)      = delete;
-      ostringstream& operator=(ostringstream&& os)      = delete;
-      
+      ostringstream(std::string&& str);
+
       std::string str(void) const;
   };
 
   template<typename T>
   ostringstream& operator<<(ostringstream& os, T&& v)
+  {
+      os.print(std::forward<T>(v));
+      return os;
+  }
+
+  class StringStreamImpl;
+  class stringstream
+    : public istream
+    , public ostream
+  {
+    private :
+      StringStreamImpl* Impl;
+      stringstream(StringStreamImpl* impl);    
+    public  :  
+      stringstream(void);
+      stringstream(std::string&& str);
+     ~stringstream(void);
+
+      std::string str(void) const;
+  };
+
+  template<typename T>
+  stringstream& operator>>(stringstream& os, T& v)
+  {
+      os.scan(v);
+      return os;
+  }
+  
+  template<typename T>
+  stringstream& operator<<(stringstream& os, T&& v)
   {
       os.print(std::forward<T>(v));
       return os;
