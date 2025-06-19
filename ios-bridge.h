@@ -24,19 +24,21 @@ namespace stream
   class base
   {
     private :
+      // non-owning
       BaseImpl* Impl;
     public  :
       base(BaseImpl* impl)
         : Impl(impl)
       {
       }
-      ~base();
-      BaseImpl& impl(void) { return *Impl; }
+      ~base(void)                     = default;
       base           (const base& os) = delete;
       base& operator=(const base& os) = delete;
       base           (base&& os)      = delete;
       base& operator=(base&& os)      = delete;
       
+      BaseImpl& impl(void) { return *Impl; }
+
       bool good         (void) const;
       bool eof          (void) const;
       bool fail         (void) const;

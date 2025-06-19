@@ -21,6 +21,7 @@ namespace stream
       ifstream(IFStreamImpl* impl);
     public  :
       ifstream    (void);
+     ~ifstream    (void);
       ifstream    (const std::string& fileName, ios_base::openmode om=ios_base::in);
       void open   (const std::string& fileName, ios_base::openmode om=ios_base::in);
       bool is_open(void) const;
@@ -41,6 +42,7 @@ namespace stream
       ofstream(OFStreamImpl* impl);
     public  :
       ofstream    (void);
+     ~ofstream    (void);
       ofstream    (const std::string& fileName, ios_base::openmode om=ios_base::in);
       void open   (const std::string& fileName, ios_base::openmode om=ios_base::in);
       bool is_open(void) const;
@@ -63,6 +65,7 @@ namespace stream
       fstream(FStreamImpl* impl);
     public  :
       fstream     (void);
+     ~fstream     (void);
       fstream     (const std::string& fileName, ios_base::openmode om=ios_base::in);
       void open   (const std::string& fileName, ios_base::openmode om=ios_base::in);
       bool is_open(void) const;

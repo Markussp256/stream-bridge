@@ -22,6 +22,7 @@ namespace stream
       istringstream(IStringStreamImpl* impl);
     public  :  
       istringstream(void);
+     ~istringstream(void);
       istringstream(const std::string& str);
 
       std::string str(void) const;
@@ -42,6 +43,7 @@ namespace stream
       ostringstream(OStringStreamImpl* impl);
     public  :  
       ostringstream(void);
+     ~ostringstream(void);
       ostringstream(const std::string& str);
 
       std::string str(void) const;
@@ -64,6 +66,7 @@ namespace stream
       stringstream(StringStreamImpl* impl);    
     public  :  
       stringstream(void);
+     ~stringstream(void);
       stringstream(const std::string& str);
 
       std::string str(void) const;

@@ -29,8 +29,6 @@ namespace stream
     return res;
   }
 
-  base :: ~base() { delete Impl; }
-
   bool       base :: good         (void) const   { return Impl->Base.good         (); }
   bool       base :: eof          (void) const   { return Impl->Base.eof          (); }
   bool       base :: fail         (void) const   { return Impl->Base.fail         (); }
