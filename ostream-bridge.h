@@ -54,7 +54,7 @@ namespace stream
       os.print(v);
       return os;
   }
-  ostream& flush(ostream& os) { os.flush(); return os; }
+  inline ostream& flush(ostream& os) { os.flush(); return os; }
   ostream& endl (ostream&);
 }
 
