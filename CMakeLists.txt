@@ -7,17 +7,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Collect headers and sources (you can also list them manually if preferred)
 set(STREAM_BRIDGE_HEADERS
+    iosfwd-bridge.h
+    ios-bridge.h
     istream-bridge.h
     ostream-bridge.h
     iostream-bridge.h
+    iomanip-bridge.h
     sstream-bridge.h
     fstream-bridge.h
     ios-base-impl.h
     istream-impl.h
     ostream-impl.h
-    iosfwd-bridge.h
     iostream-template.h
-    ios-bridge.h
 )
 
 set(STREAM_BRIDGE_SOURCES
@@ -25,6 +26,7 @@ set(STREAM_BRIDGE_SOURCES
     istream-bridge.cpp
     ostream-bridge.cpp
     iostream-bridge.cpp
+    iomanip-bridge.cpp
     sstream-bridge.cpp
     fstream-bridge.cpp
 )
@@ -32,6 +34,7 @@ set(STREAM_BRIDGE_SOURCES
 add_library(stream-bridge STATIC
     ${STREAM_BRIDGE_HEADERS}
     ${STREAM_BRIDGE_SOURCES}
+
     
 )
 

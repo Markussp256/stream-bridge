@@ -9,7 +9,6 @@
 
 //  c++
 
-    #include <utility> // for std::forward
     #include <string>
 
 
@@ -23,8 +22,7 @@ namespace stream
       istringstream(IStringStreamImpl* impl);
     public  :  
       istringstream(void);
-     ~istringstream(void);
-      istringstream(std::string&& str);
+      istringstream(const std::string& str);
 
       std::string str(void) const;
   };
@@ -44,16 +42,15 @@ namespace stream
       ostringstream(OStringStreamImpl* impl);
     public  :  
       ostringstream(void);
-     ~ostringstream(void);
-      ostringstream(std::string&& str);
+      ostringstream(const std::string& str);
 
       std::string str(void) const;
   };
 
   template<typename T>
-  ostringstream& operator<<(ostringstream& os, T&& v)
+  ostringstream& operator<<(ostringstream& os, const T& v)
   {
-      os.print(std::forward<T>(v));
+      os.print(v);
       return os;
   }
 
@@ -67,8 +64,7 @@ namespace stream
       stringstream(StringStreamImpl* impl);    
     public  :  
       stringstream(void);
-      stringstream(std::string&& str);
-     ~stringstream(void);
+      stringstream(const std::string& str);
 
       std::string str(void) const;
   };
@@ -81,9 +77,9 @@ namespace stream
   }
   
   template<typename T>
-  stringstream& operator<<(stringstream& os, T&& v)
+  stringstream& operator<<(stringstream& os, const T& v)
   {
-      os.print(std::forward<T>(v));
+      os.print(v);
       return os;
   }
 }

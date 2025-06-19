@@ -14,7 +14,7 @@ namespace stream
         using stdistream_t::stdistream_t;
         IStreamImpl Is{*this};
     };
-    
+
     template<class stdostream_t>
     class OStreamImplTemplate : public stdostream_t
     {
@@ -22,7 +22,7 @@ namespace stream
         using stdostream_t::stdostream_t;
         OStreamImpl Os{*this};
     };
-    
+
     template<class stdstream_t>
     class StreamImplTemplate : public stdstream_t
     {

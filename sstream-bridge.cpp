@@ -30,8 +30,7 @@ namespace stream
     }
 
     istringstream ::  istringstream(void) : istringstream(new IStringStreamImpl()) {}
-    istringstream ::  istringstream(std::string&& str) : istringstream(new IStringStreamImpl(std::move(str))) {}
-    istringstream :: ~istringstream(void) { delete Impl; }
+    istringstream ::  istringstream(const std::string& str) : istringstream(new IStringStreamImpl(str)) {}
     std::string istringstream :: str(void) const { return Impl -> str(); }
 
 
@@ -49,8 +48,7 @@ namespace stream
     }
 
     ostringstream ::  ostringstream(void) : ostringstream(new OStringStreamImpl()) {}
-    ostringstream ::  ostringstream(std::string&& str) : ostringstream(new OStringStreamImpl(std::move(str))) {}
-    ostringstream :: ~ostringstream(void) { delete Impl; }
+    ostringstream ::  ostringstream(const std::string& str) : ostringstream(new OStringStreamImpl(str)) {}
     std::string ostringstream :: str(void) const { return Impl -> str(); }
     
     struct StringStreamImpl : public StreamImplTemplate<std::stringstream>
@@ -68,8 +66,7 @@ namespace stream
     }
 
     stringstream ::  stringstream(void) : stringstream(new StringStreamImpl()) {}
-    stringstream ::  stringstream(std::string&& str) : stringstream(new StringStreamImpl(std::move(str))) {}
-    stringstream :: ~stringstream(void) { delete Impl; }
+    stringstream ::  stringstream(const std::string& str) : stringstream(new StringStreamImpl(str)) {}
     std::string stringstream :: str(void) const { return Impl -> str(); }
 
 }

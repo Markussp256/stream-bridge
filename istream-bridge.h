@@ -6,10 +6,6 @@
     #include "ios-bridge.h"
 
 
-//  c++
-
-    #include <utility> // for std::forward
-
 namespace stream
 {
   class IStreamImpl;
@@ -33,18 +29,18 @@ namespace stream
       void scan(long long );
       void scan(unsigned  );
 
-      char      get       (void);
-      char      peek      (void) const;
-      istream&  getline   (char* str, streamsize count);
-      istream&  read      (char* str, streamsize count);
-      streampos tellg     (void);
-      istream&  seekg     (streampos sp);
+      char      get    (void);
+      char      peek   (void) const;
+      istream&  getline(char* str, streamsize count);
+      istream&  read   (char* str, streamsize count);
+      streampos tellg  (void);
+      istream&  seekg  (streampos sp);
   };
 
   template<typename T>
-  istream& operator>>(istream& os, T&& v)
+  istream& operator>>(istream& os, T& v)
   {
-      os.scan(std::forward<T>(v));
+      os.scan(v);
       return os;
   }
 }

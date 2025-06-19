@@ -30,6 +30,8 @@ namespace stream
         : Impl(impl)
       {
       }
+      ~base();
+      BaseImpl& impl(void) { return *Impl; }
       base           (const base& os) = delete;
       base& operator=(const base& os) = delete;
       base           (base&& os)      = delete;
@@ -41,10 +43,15 @@ namespace stream
       bool bad          (void) const;
       bool operator!    (void) const;
            operator bool(void) const;
+    
 
       streamsize width    (streamsize w);
       streamsize precision(streamsize p);
   };
+  base& fixed     (base&);
+  base& scientific(base&);
+  base& hex       (base&);
+  base& boolalpha (base&);
 }
 
 #endif // IOS-BRIDGE_H

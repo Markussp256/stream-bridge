@@ -9,7 +9,6 @@
 
 //  c++
 
-    #include <utility> // for std::forward
     #include <string>
 
 
@@ -22,7 +21,6 @@ namespace stream
       ifstream(IFStreamImpl* impl);
     public  :
       ifstream    (void);
-     ~ifstream    (void);
       ifstream    (const std::string& fileName, ios_base::openmode om=ios_base::in);
       void open   (const std::string& fileName, ios_base::openmode om=ios_base::in);
       bool is_open(void) const;
@@ -43,7 +41,6 @@ namespace stream
       ofstream(OFStreamImpl* impl);
     public  :
       ofstream    (void);
-     ~ofstream    (void);
       ofstream    (const std::string& fileName, ios_base::openmode om=ios_base::in);
       void open   (const std::string& fileName, ios_base::openmode om=ios_base::in);
       bool is_open(void) const;
@@ -51,9 +48,9 @@ namespace stream
   };
 
   template<typename T>
-  ofstream& operator<<(ofstream& os, T&& v)
+  ofstream& operator<<(ofstream& os, const T& v)
   {
-      os.print(std::forward<T>(v));
+      os.print(v);
       return os;
   }
 
@@ -66,7 +63,6 @@ namespace stream
       fstream(FStreamImpl* impl);
     public  :
       fstream     (void);
-     ~fstream     (void);
       fstream     (const std::string& fileName, ios_base::openmode om=ios_base::in);
       void open   (const std::string& fileName, ios_base::openmode om=ios_base::in);
       bool is_open(void) const;
@@ -81,9 +77,9 @@ namespace stream
   }
 
   template<typename T>
-  fstream& operator<<(fstream& os, T&& v)
+  fstream& operator<<(fstream& os, const T& v)
   {
-      os.print(std::forward<T>(v));
+      os.print(v);
       return os;
   }
 }

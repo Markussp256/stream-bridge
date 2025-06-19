@@ -3,13 +3,9 @@
 
 #include "ios-bridge.h"
 
-#include <utility> // for std::forward
-
 namespace stream
 {
-  struct setw            { streamsize Sz; };
-  struct setprecision    { streamsize P; };
-  struct setfill         { char       C; };
+
   class  OStreamImpl;
 
   class  ostream : public virtual base
@@ -30,27 +26,22 @@ namespace stream
       void print(long long );
       void print(unsigned  );
       void print(const void*);
-      void print(const char*     str);
-      void print(setw            sw) { width    (sw.Sz); }
-      void print(setprecision    sp) { precision(sp.P);  }
+      void print(const char*);
       void print(ostream& (*manip)(ostream&)) { manip(*this); }
-      void print(setfill         sf);
 
-
-      void       put      (char       c);
-      void       flush    (void);
+      ostream& put  (char c);
+      char     fill (char c);
+      void     flush(void);
   };
 
   template<typename T>
-  ostream& operator<<(ostream& os, T&& v)
+  ostream& operator<<(ostream& os, const T& v)
   {
-      os.print(std::forward<T>(v));
+      os.print(v);
       return os;
   }
-
-  ostream& endl     (ostream&);
-  ostream& hex      (ostream&);
-  ostream& boolalpha(ostream&);
+  ostream& flush(ostream& os) { os.flush(); return os; }
+  ostream& endl (ostream&);
 }
 
 
