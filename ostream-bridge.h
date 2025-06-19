@@ -1,7 +1,15 @@
 #ifndef OSTREAM_BRIDGE_H
 #define OSTREAM_BRIDGE_H
 
-#include "ios-bridge.h"
+//  app
+
+    #include "ios-bridge.h"
+
+
+//  c++
+
+    #include <type_traits>
+
 
 namespace stream
 {
@@ -27,7 +35,13 @@ namespace stream
       void print(unsigned  );
       void print(const void*);
       void print(const char*);
-      void print(ostream& (*manip)(ostream&)) { manip(*this); }
+      
+      template <typename T>
+      typename std::enable_if_t<std::is_base_of_v<base, T>>
+      print(T& (*manip)(T&))
+      {
+          manip(*this);
+      }
 
       ostream& put  (char c);
       char     fill (char c);
