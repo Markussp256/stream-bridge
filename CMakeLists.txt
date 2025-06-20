@@ -19,6 +19,7 @@ set(STREAM_BRIDGE_HEADERS
     istream-impl.h
     ostream-impl.h
     iostream-template.h
+    bitmap-conversion.h
 )
 
 set(STREAM_BRIDGE_SOURCES
@@ -29,13 +30,12 @@ set(STREAM_BRIDGE_SOURCES
     iomanip-bridge.cpp
     sstream-bridge.cpp
     fstream-bridge.cpp
+    ios-base-impl.cpp
 )
 
 add_library(stream-bridge STATIC
     ${STREAM_BRIDGE_HEADERS}
     ${STREAM_BRIDGE_SOURCES}
-
-    
 )
 
 target_include_directories(stream-bridge PUBLIC

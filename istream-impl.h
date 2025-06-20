@@ -13,12 +13,12 @@
 
 namespace stream
 {
-    class IStreamImpl : public BaseImpl
+    class IStreamImpl : public BasicIOSImpl
     {
         public :
         std::istream& Is;
         IStreamImpl(std::istream& is)
-            : BaseImpl{is}
+            : BasicIOSImpl{is}
             , Is(is)
         {
         }

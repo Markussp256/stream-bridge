@@ -15,8 +15,13 @@
 
 namespace stream
 {
+
+
+
+  //  ostream
+
   ostream :: ostream(OStreamImpl* impl)
-    : base(impl)
+    : basic_ios(impl)
     , Impl(impl)
   {
   }
@@ -37,4 +42,14 @@ namespace stream
   ostream& ostream :: put  (char c) { Impl->Os.put(c); return *this; }
   char     ostream :: fill (char c) { return Impl->Os.fill(c); }
   void     ostream :: flush(void)   { Impl->Os.flush(); }
+  
+
+  ostream* basic_ios :: tie(ostream& other)
+  {
+    ostream* oldTied=Tied;
+    Tied=&other;
+    Impl->basicIOS().tie(&other.impl().Os);
+    return oldTied; 
+  }
+  
 }

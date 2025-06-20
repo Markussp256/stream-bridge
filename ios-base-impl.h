@@ -5,10 +5,24 @@
 
 namespace stream
 {
-    class BaseImpl
+    class IOSBaseImpl
     {
+        std::ios_base& IOSBase;
       public :
-        std::basic_ios<char>& Base;
+        explicit IOSBaseImpl(std::ios_base& iosBase)
+            : IOSBase(iosBase)
+        {
+        }
+        std::ios_base& iosBase(void) { return IOSBase; }
+    };
+
+    class BasicIOSImpl : public IOSBaseImpl
+    {
+        std::basic_ios<char>& BasicIOS;
+      public :
+          explicit BasicIOSImpl(std::basic_ios<char>& base);
+
+         std::basic_ios<char>& basicIOS(void) { return BasicIOS; }
     };
 }
 

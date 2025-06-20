@@ -16,11 +16,12 @@ namespace stream
 
   class  OStreamImpl;
 
-  class  ostream : public virtual base
+  class  ostream : public virtual basic_ios
   {
     private :
       // ostream does not own Impl hence we do not implement a destructor
       OStreamImpl* Impl;
+      friend basic_ios;
     public  :
       ostream(OStreamImpl* impl);
 
@@ -37,7 +38,7 @@ namespace stream
       void print(const char*);
       
       template <typename T>
-      typename std::enable_if_t<std::is_base_of_v<base, T>>
+      typename std::enable_if_t<std::is_base_of_v<basic_ios, T>>
       print(T& (*manip)(T&))
       {
           manip(*this);

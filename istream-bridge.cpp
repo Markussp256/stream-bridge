@@ -18,7 +18,7 @@ namespace stream
 {
 
   istream :: istream(IStreamImpl* impl)
-    : base(impl)
+    : basic_ios(impl)
     , Impl(impl)
   {
   }

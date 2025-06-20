@@ -13,12 +13,12 @@
 
 namespace stream
 {
-    class OStreamImpl : public BaseImpl
+    class OStreamImpl : public BasicIOSImpl
     {
         public :
         std::ostream& Os;
         OStreamImpl(std::ostream& os)
-            : BaseImpl{os}
+            : BasicIOSImpl{os}
             , Os(os)
         {
         }

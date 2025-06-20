@@ -12,7 +12,7 @@ namespace stream
   
   
   
-  class  istream : public virtual base
+  class  istream : public virtual basic_ios
   {
     private :
       // istream does not own Impl hence we do not implement a destructor
