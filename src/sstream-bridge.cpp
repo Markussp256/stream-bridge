@@ -11,7 +11,7 @@
 //  c++
 
     #include <sstream>
-
+    #include <string>
 
 namespace stream
 {

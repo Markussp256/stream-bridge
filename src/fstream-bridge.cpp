@@ -12,6 +12,7 @@
 //  c++
 
     #include <fstream>
+    #include <string>
 
 
 namespace stream

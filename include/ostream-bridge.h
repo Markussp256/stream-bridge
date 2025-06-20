@@ -4,6 +4,7 @@
 //  app
 
     #include "ios-bridge.h"
+    #include "string-fwd.h"
 
 
 //  c++
@@ -26,17 +27,18 @@ namespace stream
       ostream(OStreamImpl* impl);
 
       OStreamImpl& impl(void) { return *Impl; }
-      void print(char      );
-      void print(bool      );
-      void print(int       );
-      void print(float     );
-      void print(size_t    );
-      void print(long      );
-      void print(long long );
-      void print(unsigned  );
-      void print(const void*);
-      void print(const char*);
-      
+      void print(char              );
+      void print(bool              );
+      void print(int               );
+      void print(float             );
+      void print(size_t            );
+      void print(long              );
+      void print(long long         );
+      void print(unsigned          );
+      void print(const void*       );
+      void print(const char*       );
+      void print(const std::string&);
+
       template <typename T>
       typename std::enable_if_t<std::is_base_of_v<basic_ios, T>>
       print(T& (*manip)(T&))

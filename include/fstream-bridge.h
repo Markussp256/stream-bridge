@@ -5,11 +5,7 @@
 
     #include "istream-bridge.h"
     #include "ostream-bridge.h"
-
-
-//  c++
-
-    #include <string>
+    #include "string-fwd.h"
 
 
 namespace stream
