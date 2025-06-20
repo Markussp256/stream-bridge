@@ -4,6 +4,7 @@
 //  app
 
     #include "ios-bridge.h"
+    #include "string-fwd.h"
 
 
 namespace stream
@@ -20,14 +21,15 @@ namespace stream
     public  :
       istream(IStreamImpl* impl);
       
-      void scan(char      );
-      void scan(bool      );
-      void scan(int       );
-      void scan(float     );
-      void scan(size_t    );
-      void scan(long      );
-      void scan(long long );
-      void scan(unsigned  );
+      void scan(char       &);
+      void scan(bool       &);
+      void scan(int        &);
+      void scan(float      &);
+      void scan(size_t     &);
+      void scan(long       &);
+      void scan(long long  &);
+      void scan(unsigned   &);
+      void scan(std::string&);
 
       char      get    (void);
       char      peek   (void) const;
