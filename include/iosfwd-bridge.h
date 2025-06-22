@@ -3,14 +3,16 @@
 
 namespace stream
 {
+  class ios_base;
+  class basic_ios;
   class istream;
   class ostream;
   class ifstream;
   class ofstream;
-  class fstream;
+  class  fstream;
   class istringstream;
   class ostringstream;
-  class stringstream;
+  class  stringstream;
 }
 
 

@@ -17,9 +17,9 @@ namespace stream
   {
     private :
       // istream does not own Impl hence we do not implement a destructor
-      IStreamImpl* Impl;
+      IStreamImpl& Impl;
     public  :
-      istream(IStreamImpl* impl);
+      istream(IStreamImpl& impl);
       
       void scan(char       &);
       void scan(bool       &);

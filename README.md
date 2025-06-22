@@ -16,8 +16,29 @@ This library provides lightweight replacements for the standard C++ stream heade
 You can replace these with:
 
 - `"iostream-bridge.h"`
+- `"iomanip-bridge.h"`
 - `"sstream-bridge.h"`
 - `"fstream-bridge.h"`
+
+The classes, manipulators etc. are in a namespace stream, hence replace `std::` by `stream::` for
+
+`istream`,
+`ostream`,
+`ifstream`,
+`ofstream`,
+` fstream`,
+`istringstream`,
+`ostringstream`,
+` stringstream`,
+`endl`,
+`setw`,
+`setprecision`,
+`setfill`,
+`cin`
+`cout`
+`cerr`
+
+or use `using namespace stream` if you have used `using namespace std`.
 
 The implementation uses the **Bridge / PIMPL idiom**, and simply forwards calls to the corresponding functions in the standard C++ stream library.
 

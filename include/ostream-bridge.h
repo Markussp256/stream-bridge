@@ -20,13 +20,12 @@ namespace stream
   class  ostream : public virtual basic_ios
   {
     private :
-      // ostream does not own Impl hence we do not implement a destructor
-      OStreamImpl* Impl;
+      OStreamImpl& Impl;
       friend basic_ios;
     public  :
-      ostream(OStreamImpl* impl);
+      ostream(OStreamImpl& impl);
 
-      OStreamImpl& impl(void) { return *Impl; }
+      OStreamImpl& impl(void) { return Impl; }
       void print(char              );
       void print(bool              );
       void print(int               );

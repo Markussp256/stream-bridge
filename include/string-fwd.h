@@ -9,7 +9,7 @@ namespace std
     template<
         class CharT,
         class Traits,
-        class Allocator> class basic_string;
+        class Allocator>  class basic_string;
     using string=basic_string<char,char_traits<char>,allocator<char>>;
 }
 

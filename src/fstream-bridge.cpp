@@ -24,8 +24,8 @@ namespace stream
     };
     
     ifstream ::  ifstream(IFStreamImpl* impl)
-        : basic_ios(&impl->Is)
-        , istream(&impl->Is)
+        : basic_ios(impl->Is)
+        , istream(impl->Is)
         , Impl(impl)
     {
     }
@@ -45,8 +45,8 @@ namespace stream
     };
     
     ofstream ::  ofstream(OFStreamImpl* impl)
-        : basic_ios(&impl->Os)
-        , ostream(&impl->Os)
+        : basic_ios(impl->Os)
+        , ostream(impl->Os)
         , Impl(impl)
     {
     }
@@ -66,9 +66,9 @@ namespace stream
     };
     
     fstream ::  fstream(FStreamImpl* impl)
-        : basic_ios(&impl->Is)
-        , istream(&impl->Is)
-        , ostream(&impl->Os)
+        : basic_ios(impl->Is)
+        , istream(impl->Is)
+        , ostream(impl->Os)
         , Impl(impl)
     {
     }

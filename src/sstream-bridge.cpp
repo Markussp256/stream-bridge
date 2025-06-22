@@ -23,8 +23,8 @@ namespace stream
     };
 
     istringstream ::  istringstream(IStringStreamImpl* impl)
-        : basic_ios(&impl->Is)
-        , istream(&impl->Is)
+        : basic_ios(impl->Is)
+        , istream(impl->Is)
         , Impl(impl)
     {
     }
@@ -42,8 +42,8 @@ namespace stream
     };
 
     ostringstream ::  ostringstream(OStringStreamImpl* impl)
-        : basic_ios(&impl->Os)
-        , ostream(&impl->Os)
+        : basic_ios(impl->Os)
+        , ostream(impl->Os)
         , Impl(impl)
     {
     }
@@ -60,9 +60,9 @@ namespace stream
     };
 
     stringstream ::  stringstream(StringStreamImpl* impl)
-        : basic_ios(&impl->Is)
-        , istream(&impl->Is)
-        , ostream(&impl->Os)
+        : basic_ios(impl->Is)
+        , istream(impl->Is)
+        , ostream(impl->Os)
         , Impl(impl)
     {
     }
