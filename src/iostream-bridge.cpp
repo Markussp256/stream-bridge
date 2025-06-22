@@ -31,8 +31,8 @@ namespace stream
         return impl;
     }
 
-    istream cin{&getCInImpl()};
-    ostream cout{&getCOutImpl()};
-    ostream cerr{&getCErrImpl()};
+    istream cin{getCInImpl()};
+    ostream cout{getCOutImpl()};
+    ostream cerr{getCErrImpl()};
 }
 
