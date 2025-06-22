@@ -22,10 +22,9 @@ namespace stream
   struct ios_base
   {
     private   :
-      // non-owning
-      IOSBaseImpl* Impl;
+      IOSBaseImpl& Impl;
     protected :
-      ios_base(IOSBaseImpl* impl)
+      ios_base(IOSBaseImpl& impl)
         : Impl(impl)
       {
       }
@@ -36,7 +35,7 @@ namespace stream
       ios_base           (ios_base&& os)      = delete;
       ios_base& operator=(ios_base&& os)      = delete;
 
-      IOSBaseImpl& ios_base_impl(void) { return *Impl; }
+      IOSBaseImpl& ios_base_impl(void) { return Impl; }
 
       using openmode = unsigned;
       static constexpr openmode in     = 1 << 0; // open for reading
@@ -102,14 +101,13 @@ namespace stream
   class basic_ios : public ios_base
   {
     private   :
-      // non-owning
-      BasicIOSImpl* Impl;
+      BasicIOSImpl& Impl;
       // non-owning
       ostream*      Tied;
     protected :
-      basic_ios(BasicIOSImpl* impl);
+      basic_ios(BasicIOSImpl& impl);
     public    :
-      BasicIOSImpl&  impl         (void)                           { return *Impl; }
+      BasicIOSImpl&  impl         (void)                           { return Impl; }
       bool           good         (void)                     const;
       bool           eof          (void)                     const;
       bool           fail         (void)                     const;
